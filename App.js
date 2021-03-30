@@ -5,9 +5,8 @@ import {
   View,
   TextInput,
   Dimensions,
-  TouchableHighlight,
-  TouchableNativeFeedback,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 
 const width = Dimensions.get("window").width;
@@ -18,51 +17,77 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text> Texto: {submit} </Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Escribe acá"
-        onChangeText={(t) => setText(t)}
-        defaultValue={text}
-      />
+      <ScrollView style={styles.scrollView}>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
+        <Text> Texto: {submit} </Text>
 
-      {/*
-       <TouchableHighlight
-        underlayColor={"#999"}
-        activeOpacity={0.2}
-        onPress={() => {
-          setSubmit(text);
-          alert("Texto enviado con exito");
-        }}>
-        <Text>Aceptar</Text>
-      </TouchableHighlight> 
-      */}
+        <TextInput
+          style={styles.input}
+          placeholder="Escribe acá"
+          onChangeText={(t) => setText(t)}
+          defaultValue={text}
+        />
 
-      {/*
-       <TouchableNativeFeedback
-        background={TouchableNativeFeedback.Ripple("#00f", true)}
-        onPress={() => {
-          setSubmit(text);
-          alert("Texto enviado con exito");
-        }}
-      >
-        <View style={styles.view}>
-          <Text>Aceptar</Text>
-        </View>
-      </TouchableNativeFeedback> 
-      */}
-
-      <TouchableOpacity
-        style={styles.TouchableOpacity}
-        onPress={() => {
-          setSubmit(text);
-          alert("Texto enviado con exito");
-        }}
-      >
-        <View style={styles.view}>
-          <Text>Aceptar</Text>
-        </View>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.TouchableOpacity}
+          onPress={() => {
+            setSubmit(text);
+            alert("Texto enviado con exito");
+          }}
+        >
+          <View style={styles.view}>
+            <Text>Aceptar</Text>
+          </View>
+        </TouchableOpacity>
+      </ScrollView>
     </View>
   );
 }
@@ -73,9 +98,9 @@ const styles = StyleSheet.create({
   },
   view: {
     height: 40,
-    width: 300,
+
     alignItems: "center",
-    justifyContent: "space-evenly",
+    justifyContent: "center",
   },
   input: {
     height: 40,
@@ -87,6 +112,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "space-evenly",
+    justifyContent: "center",
+  },
+  scrollView: {
+    width: Dimensions.get("window").width,
   },
 });
