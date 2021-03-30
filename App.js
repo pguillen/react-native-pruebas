@@ -5,7 +5,9 @@ import {
   View,
   TextInput,
   Dimensions,
-  Button,
+  TouchableHighlight,
+  TouchableNativeFeedback,
+  TouchableOpacity,
 } from "react-native";
 
 const width = Dimensions.get("window").width;
@@ -23,18 +25,58 @@ export default function App() {
         onChangeText={(t) => setText(t)}
         defaultValue={text}
       />
-      <Button
-        title="Aceptar"
+
+      {/*
+       <TouchableHighlight
+        underlayColor={"#999"}
+        activeOpacity={0.2}
+        onPress={() => {
+          setSubmit(text);
+          alert("Texto enviado con exito");
+        }}>
+        <Text>Aceptar</Text>
+      </TouchableHighlight> 
+      */}
+
+      {/*
+       <TouchableNativeFeedback
+        background={TouchableNativeFeedback.Ripple("#00f", true)}
         onPress={() => {
           setSubmit(text);
           alert("Texto enviado con exito");
         }}
-      />
+      >
+        <View style={styles.view}>
+          <Text>Aceptar</Text>
+        </View>
+      </TouchableNativeFeedback> 
+      */}
+
+      <TouchableOpacity
+        style={styles.TouchableOpacity}
+        onPress={() => {
+          setSubmit(text);
+          alert("Texto enviado con exito");
+        }}
+      >
+        <View style={styles.view}>
+          <Text>Aceptar</Text>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  TouchableOpacity: {
+    backgroundColor: "#EEE",
+  },
+  view: {
+    height: 40,
+    width: 300,
+    alignItems: "center",
+    justifyContent: "space-evenly",
+  },
   input: {
     height: 40,
     borderBottomColor: "#ccc",
