@@ -1,120 +1,52 @@
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  Dimensions,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
-
-const width = Dimensions.get("window").width;
+import { StyleSheet, Text, FlatList, View } from "react-native";
 
 export default function App() {
   const [text, setText] = useState("Chanchito Feliz");
   const [submit, setSubmit] = useState("");
 
-  return (
-    <View style={styles.container}>
-      <ScrollView style={styles.scrollView}>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
-        <Text> Texto: {submit} </Text>
+  return <View style={styles.container}>
+    <FlatList 
+    data={[
+      { key: '1', name: 'Pablo' },
+      { key: '2', name: 'Antonia' },
+      { key: '3', name: 'Pelusa' },
+      { key: '4', name: 'Dragon' },
+      { key: '5', name: 'Tanque' },
+      { key: '6', name: 'Verde' },
+      { key: '7', name: 'Peca' },
+      { key: '8', name: 'German' },
+      { key: '9', name: 'Nico' },
+      { key: '10', name: 'Andre' },
+      { key: '11', name: 'Vivi' },
+      { key: '12', name: 'Lucas' },
+      { key: '13', name: 'Tormenta' },
+      { key: '14', name: 'Torpe' },
+      { key: '15', name: 'Xamarin' },
+      { key: '16', name: 'Zorro' },
+      { key: '17', name: 'Barro' },
+      { key: '18', name: 'Nieto' },
+    ]}
 
-        <TextInput
-          style={styles.input}
-          placeholder="Escribe acá"
-          onChangeText={(t) => setText(t)}
-          defaultValue={text}
-        />
+    renderItem={({ item }) => <Text style={styles.item}> {item.name} </Text>}
+    />
 
-        <TouchableOpacity
-          style={styles.TouchableOpacity}
-          onPress={() => {
-            setSubmit(text);
-            alert("Texto enviado con exito");
-          }}
-        >
-          <View style={styles.view}>
-            <Text>Aceptar</Text>
-          </View>
-        </TouchableOpacity>
-      </ScrollView>
-    </View>
-  );
+  </View>;
 }
 
 const styles = StyleSheet.create({
-  TouchableOpacity: {
-    backgroundColor: "#EEE",
-  },
-  view: {
-    height: 40,
-
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  input: {
-    height: 40,
-    borderBottomColor: "#ccc",
-    borderBottomWidth: 1,
-    width: width,
-  },
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
+    alignItems: "stretch",
     justifyContent: "center",
+    paddingTop:22,
   },
-  scrollView: {
-    width: Dimensions.get("window").width,
-  },
+  item:{
+    padding: 10,
+    fontSize:22,
+    height:50,
+    borderBottomWidth: '#ccc',
+    borderBottomWidth: 1,
+  }
 });
