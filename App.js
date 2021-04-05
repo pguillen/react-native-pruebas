@@ -8,11 +8,32 @@ import {
   ActivityIndicator,
   Image,
   ImageBackground,
+  Modal,
+  Button,
+  Alert,
 } from "react-native";
+
+const crearDialogo = () => {
+  Alert.alert("Titulo", "Subtitulo o mensaje en si ...",
+   [{
+     text: 'Cancelar',
+     onPress: () => {},
+     style: 'cancel'
+   },
+  {
+    text: 'Aceptar',
+    onPress: () => { console.log('boton aceptar presionado!')},
+    style: 'aceptar'
+  }],
+  {
+    cancelable: false
+  });
+};
 
 export default function App() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [modal, setModal] = useState(false);
 
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
@@ -47,23 +68,34 @@ export default function App() {
           keyExtractor={(item) => String(item.id)}
         />
       </ImageBackground>
+
+      <Modal animationType="slide" transparent={true} visible={modal}>
+        <View style={styles.center}>
+          <Text style={styles.content}> Soy un Modal</Text>
+          <Button title="Cerrar modal" onPress={() => setModal(!modal)} />
+        </View>
+      </Modal>
+
+      <Button title="Abrir modal" onPress={() => setModal(!modal)} />
+
+      <Button title="Abrir dialogo" onPress={crearDialogo} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  photo: {
-    height: 500,
-    width: 300,
-  },
-  photoPic: {
-    height: 60,
-    width: 60,
+  content: {
+    flex: 1,
+    backgroundColor: "#eee",
+    alignItems: "center",
+    justifyContent: "center",
+    margin: 50,
   },
   center: {
     flex: 1,
-    alignItems: "center",
+    alignItems: "stretch",
     justifyContent: "center",
+    backgroundColor: "rgba(0,0,0,0.3)",
   },
   container: {
     flex: 1,
@@ -80,5 +112,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 10,
     fontSize: 22,
+  },
+  photo: {
+    height: 500,
+    width: 300,
+  },
+  photoPic: {
+    height: 60,
+    width: 60,
   },
 });
