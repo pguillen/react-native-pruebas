@@ -27,6 +27,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+      <Text>Acceso Al Hardware</Text>
       <Text>Este es mi mapa</Text>
       <MapView style={styles.map}>
         {locacion.coords ? (
