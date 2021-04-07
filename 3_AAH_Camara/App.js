@@ -1,11 +1,5 @@
 import React, { useState, useEffect, Fragment } from "react";
-import {
-  Alert,
-  Dimensions,
-  StyleSheet,
-  Text,
-  View,
-  Button,
+import {   Dimensions,  StyleSheet,  Text,  View,  Button,
   TouchableOpacity,
 } from "react-native";
 
