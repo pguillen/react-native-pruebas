@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, Dimensions, Button } from "react-native";
 import { Map, Modal, Panel, Input, List } from "./components";
 
+/**
+ * @function App
+ *
+ * @export
+ * @return {*}
+ */
 export default function App() {
   const [puntos, setPuntos] = useState([]);
   const [puntoTemp, setPuntoTemp] = useState({});
@@ -12,6 +18,11 @@ export default function App() {
 
   const togglePointsFilter = () => setPointsFilter(!pointsFilter);
 
+  /**
+   * @function handleLoongPress
+   * @description Asigna un punto al Mapa despues de mantener presionado un lugar del mismo.
+   * @param {*} e
+   */
   const handleLoongPress = (e) => {
     setPuntoTemp(e.nativeEvent.coordinate);
     setVisibilityFilter("new_punto");
