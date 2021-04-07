@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useEffect, useReducer, useMemo } from "react";
 import {
   StyleSheet,
   View,
@@ -54,71 +54,41 @@ const crearDialogo = () => {
   );
 };
 
+const users = [  { name: "lala", age: 2 },  { name: "lele", age: 3 }];
+
 export default function App() {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
+
   const [modal, setModal] = useState(false);
+
   const [state, dispaatch] = useReducer(reducer, inistialState);
 
-  const fetchUsers = async () => {
-    const response = await fetch("https://jsonplaceholder.typicode.com/users");
-    const data = await response.json();
-    setUsers(data);
-    setLoading(false);
-  };
+  const totalAge = useMemo(() => {
+    let age = 0;
+    console.log("calculando...");
+    users.forEach((element) => {
+      age = age + element.age;
+    });
 
-  useEffect(() => {
-    fetchUsers();
-  }, []);
+    return age;
+  }, [users]);
 
-  if (loading)
-    return (
-      <View style={styles.center}>
-        <Text>Cargando...</Text>
-        <ActivityIndicator size="small" color="#0000ff" />
-      </View>
-    );
+  console.log('Total Age: ', totalAge);
+
 
   return (
     <View style={styles.container}>
-      <ImageBackground
-        style={styles.photo}
-        source={{ uri: "http://placekitten.com/500/300" }}
-      >
-        <FlatList
-          style={styles.list}
-          data={users}
-          renderItem={({ item }) => (
-            <Text style={styles.item}> {item.name} </Text>
-          )}
-          keyExtractor={(item) => String(item.id)}
-        />
-      </ImageBackground>
-
       <View style={styles.container}>
         <Text onPress={() => dispaatch({ type: "incrementar" })}> + </Text>
         <Text style={styles.text}> {state.cont} </Text>
         <Text onPress={() => dispaatch({ type: "decrementar" })}> - </Text>
       </View>
 
-      <Modal animationType="slide" transparent={true} visible={modal}>
-        <View style={styles.center}>
-          <Text style={styles.content}> Soy un Modal</Text>
-          <Button title="Cerrar modal" onPress={() => setModal(!modal)} />
-        </View>
-      </Modal>
-
-      <Button title="Abrir modal" onPress={() => setModal(!modal)} />
-
-      <Button title="Abrir dialogo" onPress={crearDialogo} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  list:{
-
-  },
+  list: {},
   content: {
     flex: 1,
     backgroundColor: "#eee",
@@ -160,7 +130,7 @@ const styles = StyleSheet.create({
   photo: {
     height: 400,
     width: 250,
-    marginTop:25, 
+    marginTop: 25,
   },
   photoPic: {
     height: 60,
