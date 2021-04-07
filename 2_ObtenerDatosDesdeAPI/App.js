@@ -1,95 +1,33 @@
-import { StatusBar } from "expo-status-bar";
-import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  View,
-  Text,
-  FlatList,
-  ActivityIndicator,
-  Image,
-  ImageBackground,
-  Modal,
-  Button,
-  Alert,
-} from "react-native";
-
-const crearDialogo = () => {
-  Alert.alert("Titulo", "Subtitulo o mensaje en si ...",
-   [{
-     text: 'Cancelar',
-     onPress: () => {},
-     style: 'cancel'
-   },
-  {
-    text: 'Aceptar',
-    onPress: () => { console.log('boton aceptar presionado!')},
-    style: 'aceptar'
-  }],
-  {
-    cancelable: false
-  });
-};
+import React, { useState, useCallback } from "react";
+import { StyleSheet, View, Text } from "react-native";
 
 export default function App() {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [modal, setModal] = useState(false);
+  const [cont, setCont] = useState(0);
 
-  useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((response) => response.json())
-      .then((data) => {
-        setUsers(data);
-        setLoading(false);
-      });
-  }, []);
+  const incrementar = useCallback(() => {
+    setCont(cont + 1);
+  }, [cont]);
 
-  if (loading)
-    return (
-      <View style={styles.center}>
-        <Text>Cargando...</Text>
-        <ActivityIndicator size="small" color="#0000ff" />
-      </View>
-    );
+  const decrementar = useCallback(() => {
+    setCont(cont - 1);
+  }, [cont]);
 
   return (
     <View style={styles.container}>
-      <Image style={styles.photoPic} source={require("./assets/icon.png")} />
-
-      <ImageBackground
-        style={styles.photo}
-        source={{ uri: "http://placekitten.com/500/300" }}
-      >
-        <FlatList
-          data={users}
-          renderItem={({ item }) => (
-            <Text style={styles.item}> {item.name} </Text>
-          )}
-          keyExtractor={(item) => String(item.id)}
-        />
-      </ImageBackground>
-
-      <Modal animationType="slide" transparent={true} visible={modal}>
-        <View style={styles.center}>
-          <Text style={styles.content}> Soy un Modal</Text>
-          <Button title="Cerrar modal" onPress={() => setModal(!modal)} />
-        </View>
-      </Modal>
-
-      <Button title="Abrir modal" onPress={() => setModal(!modal)} />
-
-      <Button title="Abrir dialogo" onPress={crearDialogo} />
+      <Text onPress={() => incrementar()}> + </Text>
+      <Text style={styles.text}> {cont} </Text>
+      <Text onPress={() => decrementar()}> - </Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  list: {},
   content: {
     flex: 1,
     backgroundColor: "#eee",
     alignItems: "center",
     justifyContent: "center",
-    margin: 50,
   },
   center: {
     flex: 1,
@@ -102,7 +40,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "stretch",
     justifyContent: "center",
-    paddingTop: 22,
+  },
+  label: {
+    flex: 1,
+    backgroundColor: "#00ae57",
+    alignItems: "center",
+    justifyContent: "center",
+    display: "flex",
+    marginLeft: "auto",
+    marginRight: 10,
+    width: 40,
   },
   item: {
     borderBottomWidth: 1,
@@ -114,8 +61,9 @@ const styles = StyleSheet.create({
     fontSize: 22,
   },
   photo: {
-    height: 500,
-    width: 300,
+    height: 400,
+    width: 250,
+    marginTop: 25,
   },
   photoPic: {
     height: 60,

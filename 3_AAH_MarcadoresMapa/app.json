@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "2_ObtenerDatosDesdeAPI",
-    "slug": "2_ObtenerDatosDesdeAPI",
+    "name": "3_AccediendoAlHardware",
+    "slug": "3_AccediendoAlHardware",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
