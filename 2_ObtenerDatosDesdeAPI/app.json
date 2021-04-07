@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "3_ObtenerDatosDesdeAPI",
-    "slug": "3_ObtenerDatosDesdeAPI",
+    "name": "2_ObtenerDatosDesdeAPI",
+    "slug": "2_ObtenerDatosDesdeAPI",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

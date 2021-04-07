@@ -1,5 +1,4 @@
-import { StatusBar } from "expo-status-bar";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import {
   StyleSheet,
   View,
@@ -13,35 +12,63 @@ import {
   Alert,
 } from "react-native";
 
+const inistialState = {
+  cont: 0,
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "incrementar": {
+      return { cont: state.cont + 1 };
+    }
+    case "decrementar": {
+      return { cont: state.cont - 1 };
+    }
+    default: {
+      return state;
+    }
+  }
+};
+
 const crearDialogo = () => {
-  Alert.alert("Titulo", "Subtitulo o mensaje en si ...",
-   [{
-     text: 'Cancelar',
-     onPress: () => {},
-     style: 'cancel'
-   },
-  {
-    text: 'Aceptar',
-    onPress: () => { console.log('boton aceptar presionado!')},
-    style: 'aceptar'
-  }],
-  {
-    cancelable: false
-  });
+  Alert.alert(
+    "Titulo",
+    "Subtitulo o mensaje en si ...",
+    [
+      {
+        text: "Cancelar",
+        onPress: () => {},
+        style: "cancel",
+      },
+      {
+        text: "Aceptar",
+        onPress: () => {
+          console.log("boton aceptar presionado!");
+        },
+        style: "aceptar",
+      },
+    ],
+    {
+      cancelable: false,
+    }
+  );
 };
 
 export default function App() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [modal, setModal] = useState(false);
+  const [state, dispaatch] = useReducer(reducer, inistialState);
+
+  const fetchUsers = async () => {
+    const response = await fetch("https://jsonplaceholder.typicode.com/users");
+    const data = await response.json();
+    setUsers(data);
+    setLoading(false);
+  };
 
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((response) => response.json())
-      .then((data) => {
-        setUsers(data);
-        setLoading(false);
-      });
+    fetchUsers();
   }, []);
 
   if (loading)
@@ -54,13 +81,12 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Image style={styles.photoPic} source={require("./assets/icon.png")} />
-
       <ImageBackground
         style={styles.photo}
         source={{ uri: "http://placekitten.com/500/300" }}
       >
         <FlatList
+          style={styles.list}
           data={users}
           renderItem={({ item }) => (
             <Text style={styles.item}> {item.name} </Text>
@@ -68,6 +94,12 @@ export default function App() {
           keyExtractor={(item) => String(item.id)}
         />
       </ImageBackground>
+
+      <View style={styles.container}>
+        <Text onPress={() => dispaatch({ type: "incrementar" })}> + </Text>
+        <Text style={styles.text}> {state.cont} </Text>
+        <Text onPress={() => dispaatch({ type: "decrementar" })}> - </Text>
+      </View>
 
       <Modal animationType="slide" transparent={true} visible={modal}>
         <View style={styles.center}>
@@ -84,6 +116,9 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
+  list:{
+
+  },
   content: {
     flex: 1,
     backgroundColor: "#eee",
@@ -102,7 +137,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "stretch",
     justifyContent: "center",
-    paddingTop: 22,
+  },
+  label: {
+    flex: 1,
+    backgroundColor: "#00ae57",
+    alignItems: "center",
+    justifyContent: "center",
+    display: "flex",
+    marginLeft: "auto",
+    marginRight: 10,
+    width: 40,
   },
   item: {
     borderBottomWidth: 1,
@@ -114,8 +158,9 @@ const styles = StyleSheet.create({
     fontSize: 22,
   },
   photo: {
-    height: 500,
-    width: 300,
+    height: 400,
+    width: 250,
+    marginTop:25, 
   },
   photoPic: {
     height: 60,
