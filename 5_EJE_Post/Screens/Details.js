@@ -10,10 +10,15 @@ const styles = StyleSheet.create({
     },
   });
 
-  export default () => {
+  export default ({navigation}) => {
+    const body = navigation.getParam('body')
+    const title = navigation.getParam('title')
+    const name = navigation.getParam('name')
     return (
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
+        <Text> {name} </Text>
+        <Text> {title} </Text>
+        <Text> {body} </Text>
       </View>
     );
   }

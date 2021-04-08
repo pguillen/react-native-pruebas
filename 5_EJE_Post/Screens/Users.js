@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, FlatList } from "react-native";
+import { StyleSheet, View, FlatList, Text } from "react-native";
 import ListItem from "../components/ListItem";
 
 const styles = StyleSheet.create({
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default () => {
+export default ({ navigation }) => {
   const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState([]);
 
@@ -31,17 +31,21 @@ export default () => {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        style={styles.list}
-        data={users}
-        keyExtractor={(x) => String(x.id)}
-        renderItem={({ item }) => (
-          <ListItem
-            onPres={() => navigation.navigate("Posts", { user_id: item.id })}
-            title={item.name}
-          />
-        )}
-      />
+      {loading ? (
+        <Text> Cargando...</Text>
+      ) : (
+        <FlatList
+          style={styles.list}
+          data={users}
+          keyExtractor={(x) => String(x.id)}
+          renderItem={({ item }) => (
+            <ListItem
+              onPress={() => navigation.navigate("Posts", { user_id: item.id, name: item.name })}
+              title={item.name}
+            />
+          )}
+        />
+      )}
     </View>
   );
 };
