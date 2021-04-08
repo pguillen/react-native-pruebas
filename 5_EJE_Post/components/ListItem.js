@@ -1,5 +1,5 @@
-import React, { cloneElement } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
@@ -14,10 +14,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ({ title }) => {
+export default ({ title, onPress }) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity onPress={onPress} style={styles.container}>
       <Text style={styles.text}> {title} </Text>
-    </View>
+    </TouchableOpacity>
   );
 };
