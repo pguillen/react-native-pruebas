@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { StyleSheet, Text, View, Button } from "react-native";
-import { createAppContainer } from "react-navigation";
+import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import { createDrawerNavigator } from "react-navigation-drawer";
@@ -15,7 +15,9 @@ const HomeScreen = ({ navigation }) => {
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
       {/* <Button title="Ir a Detalle" onPress={() => navigation.push("Detalle")} /> */}
-      <Button title="Ir a Detalle" onPress={() => navigation.openDrawer()} />
+      <Button
+       title="Ir a Detalle" 
+       onPress={() => navigation.navigate('Detalle')} />
     </View>
   );
 };
@@ -65,7 +67,7 @@ DetalleScreen.navigationOptions = ({ navigation }) => {
   };
 };
 
-const AppNavigator = createDrawerNavigator(
+const AppNavigator = createSwitchNavigator(
   {
     Home: {
       screen: HomeScreen,
