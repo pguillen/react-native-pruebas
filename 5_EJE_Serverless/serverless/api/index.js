@@ -1,3 +1,3 @@
-const exports = (res, req) => {
-    res.send('Hola Pablo!!');
+module.exports = (req, res) => {
+    res.send('Hola Pablo!!')
 }
